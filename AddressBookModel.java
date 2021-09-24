@@ -9,6 +9,7 @@ public class AddressBookModel {
 	String state;
 	String city;
 	int zip;
+
 	public AddressBookModel(String firstName, String lastName, int phoneNo, String email, String address, String state,
 			String city, int zip) {
 		super();
@@ -21,12 +22,12 @@ public class AddressBookModel {
 		this.city = city;
 		this.zip = zip;
 	}
+
 	@Override
 	public String toString() {
 		return "AddressBookModel [firstName=" + firstName + ", lastName=" + lastName + ", phoneNo=" + phoneNo
 				+ ", email=" + email + ", address=" + address + ", state=" + state + ", city=" + city + ", zip=" + zip
 				+ "]";
 	}
-	
 
 }
