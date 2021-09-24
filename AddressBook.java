@@ -9,6 +9,7 @@ public class AddressBook {
 	private static final Logger log = LogManager.getLogger(AddressBook.class);
 
 	public static void main(String[] args) {
+		//Object creation
 		AddressBookService addressBookService = new AddressBookService();
 		final int EXIT_VALUE = 5;
 		int choice = 0;
@@ -16,6 +17,7 @@ public class AddressBook {
 		while (choice != EXIT_VALUE) {
 			log.info("1.Add Person\n2.Edit Person\n3.Print Person\n4.Delete person\n" + EXIT_VALUE + ".Exit");
 			choice = scanner.nextInt();
+			//using statement
 			switch (choice) {
 			case 1:
 				addressBookService.addPerson();

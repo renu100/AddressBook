@@ -101,14 +101,14 @@ public class AddressBookService {
 		}
 
 	}
-
+	//method creation for printing data
 	public void printAddressBook() {
 		for (AddressBookModel aBookModel : addressBookModels) {
 			log.info(aBookModel);
 		}
 
 	}
-
+    //method creation for delete person
 	public void deletePerson() {
 		log.info("enter person first name you want to delete");
 		String firstName = sc.next();
