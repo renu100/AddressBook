@@ -12,8 +12,8 @@ public class AddressBookService {
 
 	ArrayList<AddressBookModel> addressBookModels = new ArrayList<>();
 	Scanner sc = new Scanner(System.in);
-	
-   //creating a method
+
+	// creating a method
 	public void addPerson() {
 
 		log.info("enter First name");
@@ -101,10 +101,21 @@ public class AddressBookService {
 		}
 
 	}
-	
+
 	public void printAddressBook() {
 		for (AddressBookModel aBookModel : addressBookModels) {
-			System.out.println(aBookModel);
+			log.info(aBookModel);
+		}
+
+	}
+
+	public void deletePerson() {
+		log.info("enter person first name you want to delete");
+		String firstName = sc.next();
+		for (AddressBookModel aBookModel : addressBookModels) {
+			if (aBookModel.getFirstName().equals(firstName)) {
+				addressBookModels.remove(aBookModel);
+			}
 		}
 
 	}
