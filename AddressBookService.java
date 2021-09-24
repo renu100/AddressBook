@@ -10,14 +10,16 @@ public class AddressBookService {
 
 	private static final Logger log = LogManager.getLogger(AddressBookService.class);
 
-	ArrayList<AddressBookModel> addressBookModels = new ArrayList<>();
-	Scanner sc = new Scanner(System.in);
+	static ArrayList<AddressBookModel> addressBookModels = new ArrayList<>();
+	static Scanner sc = new Scanner(System.in);
 
 	// creating a method
-	public void addPerson() {
+	public static void addPerson() {
 
 		log.info("enter First name");
 		String firstname = sc.next();
+
+		uniquePerson(firstname);
 
 		log.info("enter Last name");
 		String lastname = sc.next();
@@ -101,14 +103,16 @@ public class AddressBookService {
 		}
 
 	}
-	//method creation for printing data
+
+	// method creation for printing data
 	public void printAddressBook() {
 		for (AddressBookModel aBookModel : addressBookModels) {
 			log.info(aBookModel);
 		}
 
 	}
-    //method creation for delete person
+
+	// method creation for delete person
 	public void deletePerson() {
 		log.info("enter person first name you want to delete");
 		String firstName = sc.next();
@@ -118,6 +122,16 @@ public class AddressBookService {
 			}
 		}
 
+	}
+	// method creation for unique person
+	public static String uniquePerson(String name) {
+		for (AddressBookModel addressBookModel : addressBookModels) {
+			if (addressBookModel.getFirstName().equals(name)) {
+				log.info("Person already exist");
+				addPerson();
+			}
+		}
+		return null;
 	}
 
 }
