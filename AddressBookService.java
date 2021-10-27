@@ -5,8 +5,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBookService {
 	private static final Logger log = LogManager.getLogger(AddressBookService.class);
@@ -61,6 +63,9 @@ public class AddressBookService {
 			log.info("enter city name");
 			String cityname = sc.next();
 
+			log.info("enter state name");
+			String stateName = sc.next();
+
 			log.info("enter email id");
 			String emailid = sc.next();
 
@@ -71,7 +76,7 @@ public class AddressBookService {
 			int phonenumber = sc.nextInt();
 
 			AddressBookModel addressBookModel = new AddressBookModel(firstname, lastname, phonenumber, emailid, address,
-					emailid, cityname, zipcode);
+					stateName, cityname, zipcode);
 			addressBookModels.add(addressBookModel);
 			log.info(addressBookModel);
 		}
@@ -185,13 +190,13 @@ public class AddressBookService {
 		// Call this to do this
 		public void driver() {
 			while (true) {
-				System.out.println("Welcome to Address Book");
-				System.out.println("1 Add\n2 Edit \n3 Delete\n4 Print\n5 Exit");
-				System.out.println("Enter option");
+				log.info("Welcome to Address Book");
+				log.info("1 Add\n2 Edit \n3 Delete\n4 Print\n5 Serach Person By City/State\n6 Exit");
+				log.info("Enter option");
 				int option = sc.nextInt();
 				sc.nextLine();
 
-				if (option == 5)
+				if (option == 6)
 					break;
 				switch (option) {
 				case 1:
@@ -206,8 +211,41 @@ public class AddressBookService {
 				case 4:
 					this.printAddressBook();
 					break;
+				case 5:
+					this.searchPersonByCity();
+					break;
 				default:
-					System.out.println("Invalid Choice");
+					log.info("Invalid Choice");
+				}
+			}
+
+		}
+
+		public void searchPersonByCity() {
+			int option = 0;
+			int EXIT_VALUE = 3;
+			while (option != EXIT_VALUE) {
+				log.info(
+						"Enter your choice \n1. person details by city \n2. person details by state \nEXIT_VALUE. Exit");
+				option = sc.nextInt();
+				switch (option) {
+				case 1:
+					log.info("Enter city name ");
+					String city = sc.next();
+					List<AddressBookModel> personCity = addressBookModels.stream()
+							.filter(person1 -> (person1.getCity().equals(city))).collect(Collectors.toList());
+					log.info("Persons in city: " + personCity);
+					break;
+
+				case 2:
+					log.info("Enter state name ");
+					String state = sc.next();
+					List<AddressBookModel> personState = addressBookModels.stream()
+							.filter(person1 -> (person1.getState().equals(state))).collect(Collectors.toList());
+					log.info("Persons in city: " + personState);
+					break;
+				default:
+					break;
 				}
 			}
 

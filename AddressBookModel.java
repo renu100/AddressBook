@@ -9,7 +9,8 @@ public class AddressBookModel {
 	String state;
 	String city;
 	int zip;
-     //Constructor
+
+	// Constructor
 	public AddressBookModel(String firstName, String lastName, int phoneNo, String email, String address, String state,
 			String city, int zip) {
 		super();
@@ -29,7 +30,8 @@ public class AddressBookModel {
 				+ ", email=" + email + ", address=" + address + ", state=" + state + ", city=" + city + ", zip=" + zip
 				+ "]";
 	}
-    //using Setter getter method
+
+	// using Setter getter method
 	public String getFirstName() {
 		return firstName;
 	}
