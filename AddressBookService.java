@@ -194,12 +194,12 @@ public class AddressBookService {
 			while (true) {
 				log.info("Welcome to Address Book");
 				log.info(
-						"1 Add\n2 Edit \n3 Delete\n4 Print\n5 Serach Person By City/State\n6 View person by City/State\n7 Person count by City/State");
+						"1 Add\n2 Edit \n3 Delete\n4 Print\n5 Serach Person By City/State\n6 View person by City/State\n7 Person count by City/State\n8 Sort by person name");
 				log.info("Enter option");
 				int option = sc.nextInt();
 				sc.nextLine();
 
-				if (option == 8)
+				if (option == 9)
 					break;
 				switch (option) {
 				case 1:
@@ -223,6 +223,9 @@ public class AddressBookService {
 					break;
 				case 7:
 					this.countByCityOrState();
+					break;
+				case 8:
+					this.sortByPersonName();
 					break;
 				default:
 					log.info("Invalid Choice");
@@ -341,6 +344,15 @@ public class AddressBookService {
 				}
 			}
 
+		}
+
+		/**
+		 * Method to sort by person's name
+		 */
+		public void sortByPersonName() {
+			List<AddressBookModel> nameSortedList = addressBookModels.stream()
+					.sorted((e1, e2) -> e1.getFirstName().compareTo(e2.getFirstName())).collect(Collectors.toList());
+			System.out.println("Sorted Persons Alphabetically\n: " + nameSortedList);
 		}
 	}
 
