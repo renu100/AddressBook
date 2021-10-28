@@ -4,7 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -82,7 +84,7 @@ public class AddressBookService {
 		}
 
 		/**
-		 * create a menth for edit person details
+		 * create a method for edit person details
 		 */
 		public void editPerson() {
 			int choice = 1;
@@ -191,12 +193,12 @@ public class AddressBookService {
 		public void driver() {
 			while (true) {
 				log.info("Welcome to Address Book");
-				log.info("1 Add\n2 Edit \n3 Delete\n4 Print\n5 Serach Person By City/State\n6 Exit");
+				log.info("1 Add\n2 Edit \n3 Delete\n4 Print\n5 Serach Person By City/State\n6 search by persone");
 				log.info("Enter option");
 				int option = sc.nextInt();
 				sc.nextLine();
 
-				if (option == 6)
+				if (option == 7)
 					break;
 				switch (option) {
 				case 1:
@@ -213,6 +215,10 @@ public class AddressBookService {
 					break;
 				case 5:
 					this.searchPersonByCity();
+					break;
+
+				case 6:
+					this.viewByCityOrState();
 					break;
 				default:
 					log.info("Invalid Choice");
@@ -243,6 +249,56 @@ public class AddressBookService {
 					List<AddressBookModel> personState = addressBookModels.stream()
 							.filter(person1 -> (person1.getState().equals(state))).collect(Collectors.toList());
 					log.info("Persons in city: " + personState);
+					break;
+				default:
+					break;
+				}
+			}
+
+		}
+
+		/*
+		 * method to search a particular contact based on city or state
+		 */
+		public void viewByCityOrState() {
+			int option = 0;
+			int EXIT_VALUE = 3;
+			while (option != EXIT_VALUE) {
+				log.info(
+						"Enter your choice \n1. person details by city \n2. person details by state \nEXIT_VALUE. Exit");
+				option = sc.nextInt();
+				switch (option) {
+				case 1:
+					String city;
+					Dictionary infoCity = new Hashtable();
+					log.info("Enter city name:");
+					city = sc.next();
+					List<AddressBookModel> streamList = addressBookModels.stream()
+							.filter(person1 -> city.equals(person1.getCity())).collect(Collectors.toList());
+					log.info("Persons in city: " + streamList);
+					for (AddressBookModel a : addressBookModels) {
+						if (a.city.equals(city)) {
+							infoCity.put(a.firstName, city);
+						}
+					}
+					log.info("The Dictionary Contains:" + infoCity);
+					break;
+
+				case 2:
+					log.info("Enter state name ");
+					String state;
+					Dictionary infoCity1 = new Hashtable();
+					log.info("Enter city name:");
+					state = sc.next();
+					List<AddressBookModel> streamList1 = addressBookModels.stream()
+							.filter(person1 -> state.equals(person1.getState())).collect(Collectors.toList());
+					log.info("Persons in city: " + streamList1);
+					for (AddressBookModel a : addressBookModels) {
+						if (a.state.equals(state)) {
+							infoCity1.put(a.firstName, state);
+						}
+					}
+					log.info("The Dictionary Contains:" + infoCity1);
 					break;
 				default:
 					break;

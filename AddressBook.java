@@ -17,7 +17,7 @@ public class AddressBook {
 
 			log.info("1 Print\n2 Create \n3 Select Existing\n4 Delete\n5 Exit");
 			int choice = sc.nextInt();
-			if (choice == 5)
+			if (choice == 7)
 				break;
 
 			switch (choice) {
@@ -45,7 +45,7 @@ public class AddressBook {
 				addressBook.deleteAddressBook(bookName);
 				addressBook.printAddressBooksNames();
 				break;
-
+				
 			}
 		}
 	}
