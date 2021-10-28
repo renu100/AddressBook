@@ -194,12 +194,12 @@ public class AddressBookService {
 			while (true) {
 				log.info("Welcome to Address Book");
 				log.info(
-						"1 Add\n2 Edit \n3 Delete\n4 Print\n5 Serach Person By City/State\n6 View person by City/State\n7 Person count by City/State\n8 Sort by person name");
+						"1 Add\n2 Edit \n3 Delete\n4 Print\n5 Serach Person By City/State\n6 View person by City/State\n7 Person count by City/State\n8 Sort by person name\n9 sort by city \n10 sort by state \n11 sort by zipcode");
 				log.info("Enter option");
 				int option = sc.nextInt();
 				sc.nextLine();
 
-				if (option == 9)
+				if (option == 12)
 					break;
 				switch (option) {
 				case 1:
@@ -226,6 +226,15 @@ public class AddressBookService {
 					break;
 				case 8:
 					this.sortByPersonName();
+					break;
+				case 9:
+					this.sortByCity();
+					break;
+				case 10:
+					this.sortByState();
+					break;
+				case 11:
+					this.sortByZip();
 					break;
 				default:
 					log.info("Invalid Choice");
@@ -328,7 +337,7 @@ public class AddressBookService {
 					city = sc.next();
 					int countCity = (int) addressBookModels.stream().filter(person1 -> city.equals(person1.getCity()))
 							.count();
-					System.out.println("Total Person Count in " + city + " city is:" + countCity);
+					log.info("Total Person Count in " + city + " city is:" + countCity);
 					break;
 
 				case 2:
@@ -337,7 +346,7 @@ public class AddressBookService {
 					state = sc.next();
 					int countState = (int) addressBookModels.stream()
 							.filter(person1 -> state.equals(person1.getState())).count();
-					System.out.println("Total Person Count in " + state + " state is:" + countState);
+					log.info("Total Person Count in " + state + " state is:" + countState);
 					break;
 				default:
 					break;
@@ -352,7 +361,34 @@ public class AddressBookService {
 		public void sortByPersonName() {
 			List<AddressBookModel> nameSortedList = addressBookModels.stream()
 					.sorted((e1, e2) -> e1.getFirstName().compareTo(e2.getFirstName())).collect(Collectors.toList());
-			System.out.println("Sorted Persons Alphabetically\n: " + nameSortedList);
+			log.info("Sorted Persons Alphabetically\n: " + nameSortedList);
+		}
+
+		/**
+		 * Method to sort by city name
+		 */
+		public void sortByCity() {
+			List<AddressBookModel> citySortedList = addressBookModels.stream()
+					.sorted((e1, e2) -> e1.getCity().compareTo(e2.getCity())).collect(Collectors.toList());
+			log.info("Sorted Persons by City\n: " + citySortedList);
+		}
+
+		/**
+		 * Method to sort by state name
+		 */
+		public void sortByState() {
+			List<AddressBookModel> stateSortedList = addressBookModels.stream()
+					.sorted((e1, e2) -> e1.getState().compareTo(e2.getState())).collect(Collectors.toList());
+			log.info("Sorted Persons by State\n: " + stateSortedList);
+		}
+
+		/**
+		 * Method to sort by zip code
+		 */
+		public void sortByZip() {
+			List<AddressBookModel> zipSortedList = addressBookModels.stream()
+					.sorted((e1, e2) -> e1.getState().compareTo(e2.getState())).collect(Collectors.toList());
+			log.info("Sorted Persons by Zip\n: " + zipSortedList);
 		}
 	}
 
